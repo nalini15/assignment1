@@ -6,6 +6,7 @@ import 'package:assignment1/screens/addressInfo.dart';
 import 'package:assignment1/style/colors.dart';
 import 'package:assignment1/viewmodel/profViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'basicInfo.dart';
@@ -212,6 +213,9 @@ class _ProfessionalInfoState extends State<ProfessionalInfo> {
                                   initialValue: prof.exp,
                                   autocorrect: true,
                                   style: TextStyle(fontSize: 15),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   validator: (value) {
                                     if (value.trimRight().trimLeft().isEmpty) {
                                       return 'Please enter your experience';

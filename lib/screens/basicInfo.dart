@@ -48,13 +48,13 @@ class _BasicInfoState extends State<BasicInfo> {
 
   void submitForm(BuildContext context) {
     if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
       final basicInfo = Provider.of<BasicViewModel>(context, listen: false);
-      if (formData['conPass'] != formData['pass']) {
+      if (formData['conPass'] != formData['password']) {
         showSnack(context, "Password and confirm password should match",
             _scaffoldkey);
       } else {
         formData.remove("conPass");
-        _formKey.currentState.save();
         basicInfo.loadData(formData);
         Navigator.push(context, FadeNavigation(widget: ProfessionalInfo()));
       }
@@ -446,7 +446,7 @@ class _BasicInfoState extends State<BasicInfo> {
                                   border: Border.all(color: textColor)),
                               child: TextFormField(
                                   initialValue: basic.password,
-                                  obscureText: !this._showPassword,
+                                  obscureText: true,
                                   autocorrect: true,
                                   style: TextStyle(fontSize: 15),
                                   validator: (value) {
@@ -459,7 +459,7 @@ class _BasicInfoState extends State<BasicInfo> {
                                     return null;
                                   },
                                   onSaved: (value) {
-                                    formData['password'] =
+                                    formData['conPass'] =
                                         value.trimLeft().trimRight();
                                   },
                                   decoration: InputDecoration(
@@ -470,7 +470,7 @@ class _BasicInfoState extends State<BasicInfo> {
                                     errorStyle: TextStyle(
                                         // color: whiteTextColor,
                                         ),
-                                    hintText: 'Password',
+                                    hintText: 'Confirm Password',
                                     hintStyle: TextStyle(color: textColor1),
                                     contentPadding: EdgeInsets.fromLTRB(
                                         20.0, 15.0, 20.0, 15.0),
