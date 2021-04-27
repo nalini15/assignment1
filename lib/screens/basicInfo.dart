@@ -20,7 +20,7 @@ class _BasicInfoState extends State<BasicInfo> {
   final picker = ImagePicker();
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     setState(() {
       if (pickedFile != null) {
@@ -97,16 +97,14 @@ class _BasicInfoState extends State<BasicInfo> {
                         CircleAvatar(
                           radius: 51,
                           backgroundColor: textColor,
-                          child: ClipOval(
-                            child: _image == null
-                                ? Image.asset(
-                                    'assets/images/user.jpg',
-                                    height: 100,
-                                    width: 100,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Image.file(_image),
-                          ),
+                          child: _image == null
+                              ? Image.asset(
+                                  'assets/images/user.jpg',
+                                  height: 100,
+                                  width: 100,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.file(_image),
                         ),
                         Positioned(
                             bottom: 1,
